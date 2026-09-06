@@ -3,137 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FF Topup Shop</title>
+    <title>EgyTopup Clone - Free Fire Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        body { background: #0f172a; color: #fff; padding: 20px 10px; }
-        .container { max-width: 500px; margin: auto; background: #1e293b; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        h2 { text-align: center; color: #f97316; margin-bottom: 20px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input, select { width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; }
-        
-        .pack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .pack-item { background: #334155; padding: 15px; text-align: center; border-radius: 6px; cursor: pointer; border: 2px solid transparent; }
-        .pack-item.active { border-color: #f97316; background: #475569; }
-        .pack-item p { margin-top: 5px; color: #38bdf8; font-weight: bold; }
-        
-        .payment-info { background: #0f172a; padding: 12px; border-radius: 6px; margin-top: 15px; font-size: 14px; border-left: 4px solid #f97316; }
-        button { width: 100%; background: #f97316; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 20px; }
-        button:hover { background: #ea580c; }
-        button:disabled { background: #64748b; cursor: not-allowed; }
+        :root {
+            --primary: #6b21a8;
+            --primary-light: #9333ea;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-bottom: 75px;
+        }
+
+        /* Top Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand-logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: #1e1b4b;
+        }
+
+        .brand-logo span {
+            color: var(--primary-light);
+            font-style: italic;
+        }
+
+        .login-btn {
+            background: var(--primary-light);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Notice Bar */
+        .notice-container {
+            padding: 10px 16px;
+        }
+
+        .notice-badge {
+            background: #fff;
+            border: 1px solid #e9d5ff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .notice-tag {
+            background: var(--primary-light);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .notice-text {
+            color: #4b5563;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        /* Banner */
+        .banner-container {
+            padding: 0 16px;
+            margin-bottom: 15px;
+        }
+
+        .banner-card {
+            background: linear-gradient(135deg, #2e0854 0%, #701a75 100%);
+            border-radius: 14px;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(112, 26, 117, 0.25);
+            text-align: center;
+        }
+
+        .banner-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #facc15;
+        }
+
+        .banner-btn {
+            background: #9333ea;
+            border: none;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: auto;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        /* Sections */
+        .section-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin: 20px 0 14px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 16px;
+        }
+
+        .item-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            cursor: pointer;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.1s;
+        }
+
+        .item-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-banner {
+            background: radial-gradient(circle, #4c1d95, #1e1b4b);
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .card-banner i {
+            font-size: 32px;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+
+        .card-tag {
+            font-size: 11px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.4);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .card-label {
+            text-align: center;
+            padding: 10px 4px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        /* Order Modal */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-body {
+            background: #fff;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-light);
+            color: #fff;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Bottom Fixed Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 6px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #64748b;
+            font-size: 11px;
+            gap: 4px;
+        }
+
+        .nav-link.active {
+            color: var(--primary-light);
+            font-weight: bold;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Free Fire Diamond Top-up</h2>
-    
-    <label>১. Player ID (UID) দিন:</label>
-    <input type="number" id="playerId" placeholder="যেমন: 123456789" required>
+    <!-- Header -->
+    <header>
+        <div class="brand-logo">EgyTop<span>UP</span></div>
+        <button class="login-btn">Login</button>
+    </header>
 
-    <label>২. ডায়মন্ড প্যাক সিলেক্ট করুন:</label>
-    <div class="pack-grid">
-        <div class="pack-item active" onclick="selectPack(this, '115 Diamonds', 80)">
-            <b>115 Diamonds</b>
-            <p>৳ 80</p>
-        </div>
-        <div class="pack-item" onclick="selectPack(this, '240 Diamonds', 160)">
-            <b>240 Diamonds</b>
-            <p>৳ 160</p>
-        </div>
-        <div class="pack-item" onclick="selectPack(this, '610 Diamonds', 400)">
-            <b>610 Diamonds</b>
-            <p>৳ 400</p>
-        </div>
-        <div class="pack-item" onclick="selectPack(this, 'Weekly Membership', 170)">
-            <b>Weekly</b>
-            <p>৳ 170</p>
+    <!-- Notice Bar -->
+    <div class="notice-container">
+        <div class="notice-badge">
+            <span class="notice-tag">NOTICE</span>
+            <span class="notice-text">EgyTopUp-এ অর্ডার করা মাত্রই পাবেন দ্রুত ডেলিভারি !</span>
         </div>
     </div>
 
-    <label>৩. পেমেন্ট মেথড:</label>
-    <select id="paymentMethod">
-        <option value="bKash">বিকাশ (Personal Send Money)</option>
-        <option value="Nagad">নগদ (Personal Send Money)</option>
-    </select>
-
-    <div class="payment-info">
-        টাকা পাঠানোর নম্বর: <b>017XXXXXXXX</b><br>
-        (Send Money করে TrxID নিচে বসান)
+    <!-- Banner -->
+    <div class="banner-container">
+        <div class="banner-card">
+            <h3>কীভাবে টপআপ করবেন?</h3>
+            <button class="banner-btn">Click to watch</button>
+        </div>
     </div>
 
-    <label>৪. Transaction ID (TrxID):</label>
-    <input type="text" id="trxId" placeholder="যেমন: 9J5K2L..." required>
+    <!-- Special Item -->
+    <h2 class="section-title">Special Item</h2>
+    <div class="item-grid">
+        <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
+            <div class="card-banner">
+                <i class="fa-solid fa-gem"></i>
+                <div class="card-tag">DISCOUNT</div>
+            </div>
+            <div class="card-label">Discount</div>
+        </div>
 
-    <button onclick="submitOrder()">অর্ডার কনফার্ম করুন</button>
-</div>
+        <div class="item-card" onclick="openOrderModal('99 Special Pack', 90)">
+            <div class="card-banner">
+                <i class="fa-solid fa-gem"></i>
+                <div class="card-tag">99 SPECIAL</div>
+            </div>
+            <div class="card-label">99 Special</div>
+        </div>
+    </div>
 
-<script>
-    let selectedPackage = "115 Diamonds";
-    let selectedPrice = 80;
+    <!-- Topup Section -->
+    <h2 class="section-title">TOPUP</h2>
+    <div class="item-grid">
+        <div class="item-card" onclick="openOrderModal('115 Diamonds', 80)">
+            <div class="card-banner">
+                <i class="fa-solid fa-fire"></i>
+                <div class="card-tag">115 💎</div>
+            </div>
+            <div class="card-label">115 Diamond - ৳ 80</div>
+        </div>
 
-    function selectPack(element, packName, price) {
-        document.querySelectorAll('.pack-item').forEach(el => el.classList.remove('active'));
-        element.classList.add('active');
-        selectedPackage = packName;
-        selectedPrice = price;
-    }
+        <div class="item-card" onclick="openOrderModal('Weekly Membership', 170)">
+            <div class="card-banner">
+                <i class="fa-solid fa-calendar-check"></i>
+                <div class="card-tag">WEEKLY</div>
+            </div>
+            <div class="card-label">Weekly - ৳ 170</div>
+        </div>
+    </div>
 
-    function submitOrder() {
-        const uid = document.getElementById('playerId').value.trim();
-        const trxId = document.getElementById('trxId').value.trim();
-        const method = document.getElementById('paymentMethod').value;
-        const submitBtn = document.querySelector('button');
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-body">
+            <div class="modal-header">
+                <h3 id="modalTitle">অর্ডার করুন</h3>
+                <span onclick="closeModal()" style="font-size: 24px; cursor: pointer;">&times;</span>
+            </div>
+            
+            <p style="font-weight: bold; margin-bottom: 12px; color: var(--primary-light);" id="packDetail"></p>
 
-        if (!uid || !trxId) {
-            alert("অনুগ্রহ করে UID এবং TrxID সঠিকভাবে দিন!");
-            return;
-        }
+            <label>Player UID:</label>
+            <input type="number" id="uidInput" class="input-box" placeholder="আপনার গেম UID দিন">
 
-        submitBtn.innerText = "অর্ডার প্রসেস হচ্ছে...";
-        submitBtn.disabled = true;
+            <label>পেমেন্ট মেথড:</label>
+            <select id="methodInput" class="input-box">
+                <option value="bKash">বিকাশ (Personal Send Money)</option>
+                <option value="Nagad">নগদ (Personal Send Money)</option>
+            </select>
 
+            <div style="background: #fdf4ff; border-left: 3px solid var(--primary-light); padding: 8px 10px; font-size: 13px; margin-bottom: 10px;">
+                নম্বর: <b>017XXXXXXXX</b> (Send Money করুন)
+            </div>
+
+            <label>Transaction ID (TrxID):</label>
+            <input type="text" id="trxInput" class="input-box" placeholder="টাকা পাঠানোর TrxID দিন">
+
+            <button class="submit-btn" onclick="sendOrder()">অর্ডার কনফার্ম করুন</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Tutorial</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fa-solid fa-border-all"></i>
+            <span>TopUp</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fa-solid fa-headset"></i>
+            <span>Contact Us</span>
+        </a>
+    </div>
+
+    <script>
+        let currentItem = '';
+        let currentPrice = 0;
+
+        // আপনার বটের তথ্য যুক্ত করা আছে
         const botToken = "8835477513:AAHdsbskTwgNs16ord36FAhe7JYhWeWQBXY";
         const chatId = "8778499897";
 
-        const text = `🛒 *নতুন অর্ডার এসেছে!*\n\n` +
-                     `👤 *Player UID:* \`${uid}\`\n` +
-                     `💎 *প্যাকেজ:* ${selectedPackage}\n` +
-                     `💵 *মূল্য:* ৳${selectedPrice}\n` +
-                     `💳 *মেথড:* ${method}\n` +
-                     `🧾 *TrxID:* \`${trxId}\``;
+        function openOrderModal(itemName, price) {
+            currentItem = itemName;
+            currentPrice = price;
+            document.getElementById('modalTitle').innerText = itemName;
+            document.getElementById('packDetail').innerText = `প্যাকেজ: ${itemName} | মূল্য: ৳${price}`;
+            document.getElementById('orderModal').classList.add('active');
+        }
 
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        function closeModal() {
+            document.getElementById('orderModal').classList.remove('active');
+        }
 
-        fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: text,
-                parse_mode: "Markdown"
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!");
-                document.getElementById('playerId').value = '';
-                document.getElementById('trxId').value = '';
-            } else {
-                alert("অর্ডার পাঠাতে সমস্যা হয়েছে। আপনার টেলিগ্রাম বটে গিয়ে /start চাপ দিয়েছেন কিনা চেক করুন।");
+        function sendOrder() {
+            const uid = document.getElementById('uidInput').value.trim();
+            const trxId = document.getElementById('trxInput').value.trim();
+            const method = document.getElementById('methodInput').value;
+            const btn = document.querySelector('.submit-btn');
+
+            if (!uid || !trxId) {
+                alert("দয়া করে UID এবং TrxID সঠিকভাবে দিন!");
+                return;
             }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("নেটওয়ার্ক সমস্যা হয়েছে!");
-        })
-        .finally(() => {
-            submitBtn.innerText = "অর্ডার কনফার্ম করুন";
-            submitBtn.disabled = false;
-        });
-    }
-</script>
 
+            btn.innerText = "অর্ডার সাবমিট হচ্ছে...";
+            btn.disabled = true;
+
+            const text = `🛒 *নতুন ওয়েবসাইট অর্ডার!*\n\n` +
+                         `💎 *আইটেম:* ${currentItem}\n` +
+                         `💵 *মূল্য:* ৳${currentPrice}\n` +
+                         `👤 *UID:* \`${uid}\`\n` +
+                         `💳 *মেথড:* ${method}\n` +
+                         `🧾 *TrxID:* \`${trxId}\``;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: "Markdown"
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    alert("আপনার অর্ডার সফলভাবে গৃহীত হয়েছে!");
+                    closeModal();
+                    document.getElementById('uidInput').value = '';
+                    document.getElementById('trxInput').value = '';
+                } else {
+                    alert("অর্ডার পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+                }
+            })
+            .catch(() => alert("ইন্টারনেট সংযোগ সমস্যা!"))
+            .finally(() => {
+                btn.innerText = "অর্ডার কনফার্ম করুন";
+                btn.disabled = false;
+            });
+        }
+    </script>
 </body>
 </html>
