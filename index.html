@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Top up - Free Fire Shop</title>
+    <title>Auto Top up - Games TopUp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6b21a8;
-            --primary-light: #9333ea;
-            --bg-light: #f8fafc;
-            --text-dark: #1e293b;
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --primary-light: #8b5cf6;
+            --bg-page: #f8fafc;
+            --text-main: #1e293b;
         }
 
         * {
@@ -22,73 +23,78 @@
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            padding-bottom: 75px;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            padding-bottom: 90px;
         }
 
-        /* Top Header */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            background: #ffffff;
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
         }
 
         .brand-logo {
             font-size: 22px;
             font-weight: 900;
-            color: #1e1b4b;
-        }
-
-        .brand-logo span {
-            color: var(--primary-light);
-            font-style: italic;
-        }
-
-        .login-btn {
-            background: var(--primary-light);
-            color: #fff;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
+            color: #111827;
+            letter-spacing: -0.5px;
             cursor: pointer;
         }
 
-        /* Notice Bar */
-        .notice-container {
-            padding: 10px 16px;
+        .brand-logo span {
+            color: var(--primary);
+            font-style: italic;
         }
 
-        .notice-badge {
-            background: #fff;
-            border: 1px solid #e9d5ff;
+        .login-nav-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 7px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Notice Banner */
+        .notice-container {
+            padding: 12px 16px 6px;
+        }
+
+        .notice-box {
+            background: #ffffff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 5px 12px;
+            gap: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border: 1px solid #ede9fe;
+        }
+
+        .notice-pill {
+            background: var(--primary);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
             border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
-            font-size: 12px;
-        }
-
-        .notice-tag {
-            background: var(--primary-light);
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 12px;
-            text-transform: uppercase;
+            gap: 4px;
         }
 
         .notice-text {
+            font-size: 12px;
             color: #4b5563;
             white-space: nowrap;
             overflow: hidden;
@@ -96,96 +102,109 @@
             flex-grow: 1;
         }
 
-        /* Banner */
-        .banner-container {
-            padding: 0 16px;
-            margin-bottom: 15px;
+        /* Video Banner */
+        .banner-wrap {
+            padding: 8px 16px 16px;
         }
 
         .banner-card {
-            background: linear-gradient(135deg, #2e0854 0%, #701a75 100%);
-            border-radius: 14px;
-            padding: 20px;
+            background: linear-gradient(135deg, #1e053a 0%, #3b0764 45%, #701a75 100%);
+            border-radius: 16px;
+            padding: 24px 16px;
             color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(112, 26, 117, 0.25);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(112, 26, 117, 0.25);
         }
 
-        .banner-card h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: #facc15;
+        .banner-card h2 {
+            font-size: 22px;
+            color: #fde047;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        .banner-btn {
-            background: #9333ea;
-            border: none;
-            color: white;
-            padding: 6px 14px;
+        .watch-btn {
+            background: rgba(139, 92, 246, 0.5);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 12px;
-            margin: auto;
+            font-weight: 600;
             cursor: pointer;
-            width: fit-content;
+            backdrop-filter: blur(4px);
         }
 
-        /* Sections */
+        /* Section Headings */
         .section-title {
             text-align: center;
             font-size: 18px;
             font-weight: 800;
             color: #1e3a8a;
-            margin: 20px 0 14px 0;
-            letter-spacing: 0.5px;
+            margin: 22px 0 14px;
         }
 
+        /* Item Grids */
         .item-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 14px;
             padding: 0 16px;
         }
 
         .item-card {
-            background: #fff;
-            border-radius: 12px;
+            background: #ffffff;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
             border: 1px solid #f1f5f9;
-            transition: transform 0.1s;
+            cursor: pointer;
+            transition: transform 0.15s ease;
         }
 
         .item-card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
-        .card-banner {
-            background: radial-gradient(circle, #4c1d95, #1e1b4b);
-            height: 100px;
+        .card-visual {
+            background: radial-gradient(circle at center, #3b0764 0%, #1e1b4b 100%);
+            height: 125px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #fff;
             position: relative;
+            padding: 8px;
         }
 
-        .card-banner i {
-            font-size: 32px;
-            color: #38bdf8;
-            margin-bottom: 4px;
-        }
-
-        .card-tag {
-            font-size: 11px;
+        .watermark {
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
             font-weight: bold;
-            background: rgba(0,0,0,0.4);
-            padding: 2px 6px;
-            border-radius: 4px;
+        }
+
+        .card-visual i {
+            font-size: 34px;
+            color: #38bdf8;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6));
+        }
+
+        .card-badge {
+            font-size: 10px;
+            font-weight: 900;
+            color: #facc15;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .card-label {
@@ -194,6 +213,258 @@
             font-size: 13px;
             font-weight: 700;
             color: #334155;
+            background: #ffffff;
+        }
+
+        /* Footer Info Section (Screenshots 3, 4) */
+        .footer-info {
+            padding: 30px 16px 10px;
+            margin-top: 25px;
+            border-top: 1px solid #ede9fe;
+        }
+
+        .footer-brand {
+            font-size: 20px;
+            font-weight: 900;
+            color: #111827;
+        }
+
+        .footer-brand span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .footer-sub {
+            font-size: 13px;
+            color: #4b5563;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        .footer-desc {
+            font-size: 12px;
+            color: #64748b;
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .social-btn {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            text-decoration: none;
+        }
+
+        .helpline-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 14px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .helpline-card i {
+            font-size: 24px;
+            color: #0084ff;
+        }
+
+        .helpline-card div b {
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .helpline-card div p {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .footer-links {
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 25px;
+            line-height: 2;
+        }
+
+        .footer-links a {
+            color: #475569;
+            text-decoration: none;
+            margin: 0 5px;
+            font-weight: 500;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .copyright span {
+            color: var(--primary);
+        }
+
+        /* Floating Support Button */
+        .floating-headset {
+            position: fixed;
+            bottom: 80px;
+            right: 18px;
+            background: radial-gradient(circle, #c084fc, #9333ea);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+            cursor: pointer;
+            z-index: 90;
+        }
+
+        /* Bottom Fixed Tab Nav */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 6px;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            border-top: 1px solid #f1f5f9;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 11px;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .tab-btn i {
+            font-size: 19px;
+        }
+
+        /* View Management */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        /* Login Card View (Screenshot 6) */
+        .login-card-container {
+            padding: 30px 16px;
+        }
+
+        .login-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .login-box h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            background: #ffffff;
+        }
+
+        .primary-action-btn {
+            width: 100%;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         /* Order Modal */
@@ -204,10 +475,10 @@
             display: none;
             justify-content: center;
             align-items: flex-end;
-            z-index: 100;
+            z-index: 200;
         }
 
-        .modal.active {
+        .modal.show {
             display: flex;
         }
 
@@ -220,244 +491,374 @@
             max-height: 85vh;
             overflow-y: auto;
         }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .input-box {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            margin-top: 6px;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--primary-light);
-            color: #fff;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Bottom Fixed Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0 6px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #64748b;
-            font-size: 11px;
-            gap: 4px;
-        }
-
-        .nav-link.active {
-            color: var(--primary-light);
-            font-weight: bold;
-        }
-
-        .nav-link i {
-            font-size: 18px;
-        }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <div class="brand-logo">Auto Top<span>UP</span></div>
-        <button class="login-btn">Login</button>
+        <div class="brand-logo" onclick="switchView('home')">Auto Top<span>UP</span></div>
+        <button class="login-nav-btn" onclick="switchView('login')">Login</button>
     </header>
 
-    <!-- Notice Bar -->
-    <div class="notice-container">
-        <div class="notice-badge">
-            <span class="notice-tag">NOTICE</span>
-            <span class="notice-text">Auto Top up-এ অর্ডার করা মাত্রই পাবেন দ্রুত ডেলিভারি !</span>
+    <!-- HOME TAB VIEW -->
+    <div id="view-home" class="page-view active">
+        <!-- Notice -->
+        <div class="notice-container">
+            <div class="notice-box">
+                <div class="notice-pill">● NOTICE</div>
+                <div class="notice-text">Auto Top up-এ অর্ডার করা মাত্রই পাবেন মুহূর্তে ডেলিভারি !</div>
+            </div>
+        </div>
+
+        <!-- Banner -->
+        <div class="banner-wrap">
+            <div class="banner-card">
+                <h2>কীভাবে টপআপ করবেন?</h2>
+                <button class="watch-btn" onclick="switchView('tutorial')">Click to watch</button>
+            </div>
+        </div>
+
+        <!-- Special Item -->
+        <h2 class="section-title">Special Item</h2>
+        <div class="item-grid">
+            <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">DISCOUNT</div>
+                </div>
+                <div class="card-label">Discount</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('99 Special', 90)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">99 SPECIAL</div>
+                </div>
+                <div class="card-label">99 Special</div>
+            </div>
+        </div>
+
+        <!-- TOPUP Section -->
+        <h2 class="section-title">TOPUP</h2>
+        <div class="item-grid">
+            <div class="item-card" onclick="openOrderModal('ID Code TopUp (115💎)', 80)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-fire"></i>
+                    <div class="card-badge">ID CODE TOPUP</div>
+                </div>
+                <div class="card-label">ID Code TopUp</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Weekly/Monthly Pass', 170)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <div class="card-badge">WEEKLY MONTHLY</div>
+                </div>
+                <div class="card-label">Weekly/Monthly</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Weekly Lite Pass', 50)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">WEEKLY LITE</div>
+                </div>
+                <div class="card-label">Weekly Lite</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Level Up Pass', 190)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-arrow-up-right-dots"></i>
+                    <div class="card-badge">LEVEL UP PASS</div>
+                </div>
+                <div class="card-label">Level Up Pass</div>
+            </div>
         </div>
     </div>
 
-    <!-- Banner -->
-    <div class="banner-container">
-        <div class="banner-card">
-            <h3>কীভাবে টপআপ করবেন?</h3>
-            <button class="banner-btn">Click to watch</button>
+    <!-- TOPUP TAB VIEW (Screenshot 4) -->
+    <div id="view-topup" class="page-view">
+        <h2 class="section-title" style="margin-top: 15px;">Special Item</h2>
+        <div class="item-grid">
+            <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">DISCOUNT</div>
+                </div>
+                <div class="card-label">Discount</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('99 Special', 90)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">99 SPECIAL</div>
+                </div>
+                <div class="card-label">99 Special</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">TOPUP</h2>
+        <div class="item-grid">
+            <div class="item-card" onclick="openOrderModal('ID Code TopUp', 80)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-fire"></i>
+                    <div class="card-badge">ID CODE TOPUP</div>
+                </div>
+                <div class="card-label">ID Code TopUp</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Weekly/Monthly Pass', 170)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <div class="card-badge">WEEKLY MONTHLY</div>
+                </div>
+                <div class="card-label">Weekly/Monthly</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Weekly Lite', 50)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-gem"></i>
+                    <div class="card-badge">WEEKLY LITE</div>
+                </div>
+                <div class="card-label">Weekly Lite</div>
+            </div>
+
+            <div class="item-card" onclick="openOrderModal('Level Up Pass', 190)">
+                <div class="card-visual">
+                    <span class="watermark">AutoTopUP</span>
+                    <i class="fa-solid fa-arrow-up-right-dots"></i>
+                    <div class="card-badge">LEVEL UP PASS</div>
+                </div>
+                <div class="card-label">Level Up Pass</div>
+            </div>
         </div>
     </div>
 
-    <!-- Special Item -->
-    <h2 class="section-title">Special Item</h2>
-    <div class="item-grid">
-        <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
-            <div class="card-banner">
-                <i class="fa-solid fa-gem"></i>
-                <div class="card-tag">DISCOUNT</div>
+    <!-- TUTORIAL TAB VIEW -->
+    <div id="view-tutorial" class="page-view">
+        <div style="padding: 25px 16px; text-align: center;">
+            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #1e3a8a;">টিউটোরিয়াল ভিডিও</h2>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">কীভাবে নিরাপদে আইডি কোড দিয়ে টপআপ করবেন দেখুন</p>
+            <div style="background: #000; border-radius: 12px; height: 210px; display: flex; align-items: center; justify-content: center; color: white;">
+                <i class="fa-brands fa-youtube" style="font-size: 55px; color: red;"></i>
             </div>
-            <div class="card-label">Discount</div>
-        </div>
-
-        <div class="item-card" onclick="openOrderModal('99 Special Pack', 90)">
-            <div class="card-banner">
-                <i class="fa-solid fa-gem"></i>
-                <div class="card-tag">99 SPECIAL</div>
-            </div>
-            <div class="card-label">99 Special</div>
         </div>
     </div>
 
-    <!-- Topup Section -->
-    <h2 class="section-title">TOPUP</h2>
-    <div class="item-grid">
-        <div class="item-card" onclick="openOrderModal('115 Diamonds', 80)">
-            <div class="card-banner">
-                <i class="fa-solid fa-fire"></i>
-                <div class="card-tag">115 💎</div>
+    <!-- CONTACT US VIEW (Screenshot 5) -->
+    <div id="view-contact" class="page-view">
+        <div style="padding: 30px 16px;">
+            <div style="background: #fff; border-radius: 12px; padding: 25px 20px; border: 1px solid #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <h2 style="font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 20px;">Contact Us</h2>
+                <a href="https://m.me/" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 14px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px;">
+                    <i class="fa-brands fa-facebook-messenger" style="font-size: 32px; color: #a855f7;"></i>
+                    <span style="font-size: 14px; font-weight: 700; color: #334155;">মেসেঞ্জারে লাইভ চ্যাটের জন্য এখানে ক্লিক করুন।</span>
+                </a>
             </div>
-            <div class="card-label">115 Diamond - ৳ 80</div>
-        </div>
-
-        <div class="item-card" onclick="openOrderModal('Weekly Membership', 170)">
-            <div class="card-banner">
-                <i class="fa-solid fa-calendar-check"></i>
-                <div class="card-tag">WEEKLY</div>
-            </div>
-            <div class="card-label">Weekly - ৳ 170</div>
         </div>
     </div>
 
-    <!-- Order Modal -->
+    <!-- LOGIN VIEW (Screenshot 6) -->
+    <div id="view-login" class="page-view">
+        <div class="login-card-container">
+            <div class="login-box">
+                <h2>Login</h2>
+                <button class="google-btn" onclick="alert('Google Login Feature Coming Soon!')">
+                    <i class="fa-brands fa-google" style="color: #ea4335;"></i> Login with Google
+                </button>
+                <div class="divider">Or sign in with credentials</div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" class="input-control" placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" class="input-control" placeholder="Password">
+                </div>
+                <button class="primary-action-btn" onclick="alert('Login Successful!')">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Universal Footer Info (Screenshots 3, 4, 6) -->
+    <div class="footer-info">
+        <div class="footer-brand">Auto Top<span>UP</span></div>
+        <div class="footer-sub">AutoTopUP - Games TopUp</div>
+        <div class="footer-sub" style="font-weight: 700; color: #334155;">Fast • Safe • Reliable – GAME Top-Up</div>
+        
+        <div class="footer-desc">
+            <b>নোটিশ:</b><br>
+            ডায়মন্ড কিনুন এখন AutoTopUP থেকে — দ্রুত, সহজ এবং নিরাপদে !<br><br>
+            AutoTopUP থেকে আপনি সরাসরি ডায়মন্ড কিনতে পারবেন bKash & Nagad পেমেন্টের মাধ্যমে।
+        </div>
+
+        <div class="social-row">
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube</a>
+        </div>
+
+        <h3 style="font-size: 17px; font-weight: 800; margin-top: 15px; color: #0f172a;">Contact Us</h3>
+        <div class="helpline-card">
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <div>
+                <b>Facebook HelpLine <i class="fa-solid fa-circle-check" style="color: #0084ff; font-size: 13px;"></i></b>
+                <p>সকাল ৮টা থেকে রাত ১২টা</p>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">About Us</a> <a href="#">Terms & Conditions</a> <a href="#">Privacy Policy</a><br>
+            <a href="#">Refund & Return Policy</a> <a href="#">Delete Account Policy</a>
+        </div>
+        <div class="copyright">
+            All Rights Reserved | Developed By <span>Team AutoTopUP</span>
+        </div>
+    </div>
+
+    <!-- Floating Headset Icon (Screenshots 1-6) -->
+    <div class="floating-headset" onclick="switchView('contact')">
+        <i class="fa-solid fa-headset"></i>
+    </div>
+
+    <!-- Bottom Navigation Bar (Screenshots 1-6) -->
+    <div class="bottom-bar">
+        <button class="tab-btn active" id="btn-home" onclick="switchView('home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="tab-btn" id="btn-tutorial" onclick="switchView('tutorial')">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Tutorial</span>
+        </button>
+        <button class="tab-btn" id="btn-topup" onclick="switchView('topup')">
+            <i class="fa-solid fa-border-all"></i>
+            <span>TopUp</span>
+        </button>
+        <button class="tab-btn" id="btn-contact" onclick="switchView('contact')">
+            <i class="fa-solid fa-headset"></i>
+            <span>Contact Us</span>
+        </button>
+    </div>
+
+    <!-- Order Popup Form -->
     <div class="modal" id="orderModal">
         <div class="modal-body">
-            <div class="modal-header">
-                <h3 id="modalTitle">অর্ডার করুন</h3>
-                <span onclick="closeModal()" style="font-size: 24px; cursor: pointer;">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 id="modalTitle" style="font-size: 17px; font-weight: 800;">অর্ডার নিশ্চিত করুন</h3>
+                <span onclick="closeOrderModal()" style="font-size: 26px; cursor: pointer; color: #64748b;">&times;</span>
             </div>
             
-            <p style="font-weight: bold; margin-bottom: 12px; color: var(--primary-light);" id="packDetail"></p>
+            <p style="font-weight: bold; margin-bottom: 14px; color: var(--primary);" id="packDetail"></p>
 
-            <label>Player UID:</label>
-            <input type="number" id="uidInput" class="input-box" placeholder="আপনার গেম UID দিন">
+            <label style="font-size: 13px; font-weight: 700;">Player UID:</label>
+            <input type="number" id="uidInput" class="input-control" placeholder="আপনার গেমের UID লিখুন" style="margin-top: 5px; margin-bottom: 12px;">
 
-            <label>পেমেন্ট মেথড:</label>
-            <select id="methodInput" class="input-box">
+            <label style="font-size: 13px; font-weight: 700;">পেমেন্ট মেথড:</label>
+            <select id="methodInput" class="input-control" style="margin-top: 5px; margin-bottom: 12px;">
                 <option value="bKash">বিকাশ (Personal Send Money)</option>
                 <option value="Nagad">নগদ (Personal Send Money)</option>
             </select>
 
-            <div style="background: #fdf4ff; border-left: 3px solid var(--primary-light); padding: 8px 10px; font-size: 13px; margin-bottom: 10px;">
-                নম্বর: <b>017XXXXXXXX</b> (Send Money করুন)
+            <div style="background: #f5f3ff; border-left: 3px solid var(--primary); padding: 8px 10px; font-size: 12px; margin-bottom: 12px;">
+                টাকা পাঠানোর নম্বর: <b>017XXXXXXXX</b> (Send Money করুন)
             </div>
 
-            <label>Transaction ID (TrxID):</label>
-            <input type="text" id="trxInput" class="input-box" placeholder="টাকা পাঠানোর TrxID দিন">
+            <label style="font-size: 13px; font-weight: 700;">Transaction ID (TrxID):</label>
+            <input type="text" id="trxInput" class="input-control" placeholder="টাকা পাঠানোর পর TrxID বসান" style="margin-top: 5px; margin-bottom: 15px;">
 
-            <button class="submit-btn" onclick="sendOrder()">অর্ডার কনফার্ম করুন</button>
+            <button class="primary-action-btn" id="sendBtn" onclick="submitTelegramOrder()">অর্ডার কনফার্ম করুন</button>
         </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-link">
-            <i class="fa-brands fa-youtube"></i>
-            <span>Tutorial</span>
-        </a>
-        <a href="#" class="nav-link">
-            <i class="fa-solid fa-border-all"></i>
-            <span>TopUp</span>
-        </a>
-        <a href="#" class="nav-link">
-            <i class="fa-solid fa-headset"></i>
-            <span>Contact Us</span>
-        </a>
     </div>
 
     <script>
         let currentItem = '';
         let currentPrice = 0;
 
+        // আপনার টেলিগ্রাম বট ডিটেইলস
         const botToken = "8835477513:AAHdsbskTwgNs16ord36FAhe7JYhWeWQBXY";
         const chatId = "8778499897";
 
-        function openOrderModal(itemName, price) {
-            currentItem = itemName;
+        // ট্যাব পরিবর্তন ফাংশন
+        function switchView(tabName) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetView = document.getElementById('view-' + tabName);
+            if (targetView) targetView.classList.add('active');
+
+            const targetBtn = document.getElementById('btn-' + tabName);
+            if (targetBtn) targetBtn.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // অর্ডার পপ-আপ খোলা
+        function openOrderModal(name, price) {
+            currentItem = name;
             currentPrice = price;
-            document.getElementById('modalTitle').innerText = itemName;
-            document.getElementById('packDetail').innerText = `প্যাকেজ: ${itemName} | মূল্য: ৳${price}`;
-            document.getElementById('orderModal').classList.add('active');
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('packDetail').innerText = `প্যাকেজ: ${name} | মূল্য: ৳${price}`;
+            document.getElementById('orderModal').classList.add('show');
         }
 
-        function closeModal() {
-            document.getElementById('orderModal').classList.remove('active');
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('show');
         }
 
-        function sendOrder() {
+        // টেলিগ্রামে অর্ডার পাঠানো
+        function submitTelegramOrder() {
             const uid = document.getElementById('uidInput').value.trim();
             const trxId = document.getElementById('trxInput').value.trim();
             const method = document.getElementById('methodInput').value;
-            const btn = document.querySelector('.submit-btn');
+            const btn = document.getElementById('sendBtn');
 
             if (!uid || !trxId) {
-                alert("দয়া করে UID এবং TrxID সঠিকভাবে দিন!");
+                alert("দয়া করে UID এবং TrxID সঠিকভাবে প্রদান করুন!");
                 return;
             }
 
-            btn.innerText = "অর্ডার সাবমিট হচ্ছে...";
+            btn.innerText = "অর্ডার পাঠানো হচ্ছে...";
             btn.disabled = true;
 
-            const text = `🛒 *নতুন ওয়েবসাইট অর্ডার (Auto Top up)!*\n\n` +
-                         `💎 *আইটেম:* ${currentItem}\n` +
-                         `💵 *মূল্য:* ৳${currentPrice}\n` +
-                         `👤 *UID:* \`${uid}\`\n` +
-                         `💳 *মেথড:* ${method}\n` +
-                         `🧾 *TrxID:* \`${trxId}\``;
+            const message = `🛒 *নতুন অর্ডার এসেছে (Auto Top up)!*\n\n` +
+                            `💎 *প্যাকেজ:* ${currentItem}\n` +
+                            `💵 *দাম:* ৳${currentPrice}\n` +
+                            `👤 *Player UID:* \`${uid}\`\n` +
+                            `💳 *মেথড:* ${method}\n` +
+                            `🧾 *TrxID:* \`${trxId}\``;
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     chat_id: chatId,
-                    text: text,
+                    text: message,
                     parse_mode: "Markdown"
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.ok) {
-                    alert("আপনার অর্ডার সফলভাবে গৃহীত হয়েছে!");
-                    closeModal();
+                    alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!");
+                    closeOrderModal();
                     document.getElementById('uidInput').value = '';
                     document.getElementById('trxInput').value = '';
                 } else {
-                    alert("অর্ডার পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+                    alert("অর্ডার পাঠানো যায়নি! অনুগ্রহ করে টেলিগ্রাম বটে /start চেপেছেন কিনা দেখে নিন।");
                 }
             })
-            .catch(() => alert("ইন্টারনেট সংযোগ সমস্যা!"))
+            .catch(() => alert("ইন্টারনেট সংযোগ সমস্যা হয়েছে!"))
             .finally(() => {
                 btn.innerText = "অর্ডার কনফার্ম করুন";
                 btn.disabled = false;
