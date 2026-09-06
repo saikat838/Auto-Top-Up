@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Top up - Games TopUp</title>
+    <title>Auto Top up - Professional FF Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -11,7 +11,7 @@
             --primary-dark: #6d28d9;
             --primary-light: #8b5cf6;
             --bg-page: #f8fafc;
-            --text-main: #1e293b;
+            --text-dark: #1e293b;
         }
 
         * {
@@ -24,16 +24,16 @@
 
         body {
             background-color: var(--bg-page);
-            color: var(--text-main);
-            padding-bottom: 90px;
+            color: var(--text-dark);
+            padding-bottom: 95px;
         }
 
-        /* Header */
+        /* Top Bar / Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 10px 16px;
             background: #ffffff;
             position: sticky;
             top: 0;
@@ -45,7 +45,6 @@
             font-size: 22px;
             font-weight: 900;
             color: #111827;
-            letter-spacing: -0.5px;
             cursor: pointer;
         }
 
@@ -54,20 +53,42 @@
             font-style: italic;
         }
 
-        .login-nav-btn {
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wallet-pill {
             background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 7px 18px;
-            border-radius: 6px;
-            font-weight: 600;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             cursor: pointer;
         }
 
-        /* Notice Banner */
-        .notice-container {
-            padding: 12px 16px 6px;
+        .user-avatar-badge {
+            background: #ea580c;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Notice & Banner */
+        .notice-wrap {
+            padding: 10px 16px 4px;
         }
 
         .notice-box {
@@ -75,36 +96,23 @@
             border-radius: 30px;
             display: flex;
             align-items: center;
-            padding: 5px 12px;
-            gap: 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            padding: 6px 12px;
+            gap: 8px;
             border: 1px solid #ede9fe;
+            font-size: 12px;
         }
 
-        .notice-pill {
+        .notice-tag {
             background: var(--primary);
             color: #fff;
             font-size: 10px;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 12px;
         }
 
-        .notice-text {
-            font-size: 12px;
-            color: #4b5563;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            flex-grow: 1;
-        }
-
-        /* Video Banner */
         .banner-wrap {
-            padding: 8px 16px 16px;
+            padding: 10px 16px;
         }
 
         .banner-card {
@@ -113,8 +121,6 @@
             padding: 24px 16px;
             color: #fff;
             text-align: center;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 8px 20px rgba(112, 26, 117, 0.25);
         }
 
@@ -122,20 +128,18 @@
             font-size: 22px;
             color: #fde047;
             font-weight: 900;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            margin-bottom: 10px;
         }
 
-        .watch-btn {
-            background: rgba(139, 92, 246, 0.5);
+        .banner-btn {
+            background: rgba(139, 92, 246, 0.6);
             border: 1px solid rgba(255,255,255,0.4);
             color: #fff;
-            padding: 6px 18px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            backdrop-filter: blur(4px);
         }
 
         /* Section Headings */
@@ -144,190 +148,387 @@
             font-size: 18px;
             font-weight: 800;
             color: #1e3a8a;
-            margin: 22px 0 14px;
+            margin: 20px 0 12px;
         }
 
-        /* Item Grids */
-        .item-grid {
+        /* Catalog Grids (Home & Categories) */
+        .catalog-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+            gap: 12px;
             padding: 0 16px;
         }
 
-        .item-card {
+        .catalog-card {
             background: #ffffff;
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
             border: 1px solid #f1f5f9;
             cursor: pointer;
-            transition: transform 0.15s ease;
+            transition: transform 0.15s;
         }
 
-        .item-card:active {
+        .catalog-card:active {
             transform: scale(0.97);
         }
 
-        .card-visual {
-            background: radial-gradient(circle at center, #3b0764 0%, #1e1b4b 100%);
-            height: 125px;
+        .catalog-visual {
+            background: radial-gradient(circle, #3b0764 0%, #1e1b4b 100%);
+            height: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 8px;
         }
 
-        .watermark {
-            position: absolute;
-            top: 6px;
-            left: 8px;
-            font-size: 9px;
-            color: rgba(255,255,255,0.4);
-            font-weight: bold;
-        }
-
-        .card-visual i {
-            font-size: 34px;
+        .catalog-visual i {
+            font-size: 36px;
             color: #38bdf8;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6));
+            margin-bottom: 4px;
         }
 
-        .card-badge {
+        .catalog-badge {
             font-size: 10px;
             font-weight: 900;
             color: #facc15;
             background: rgba(0, 0, 0, 0.6);
             padding: 3px 8px;
             border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .card-label {
+        .catalog-label {
             text-align: center;
             padding: 10px 4px;
             font-size: 13px;
             font-weight: 700;
             color: #334155;
+        }
+
+        /* Detail / Order Page Design */
+        .topup-view-container {
+            padding: 12px 16px;
+        }
+
+        .topup-header-card {
             background: #ffffff;
-        }
-
-        /* Footer Info Section (Screenshots 3, 4) */
-        .footer-info {
-            padding: 30px 16px 10px;
-            margin-top: 25px;
-            border-top: 1px solid #ede9fe;
-        }
-
-        .footer-brand {
-            font-size: 20px;
-            font-weight: 900;
-            color: #111827;
-        }
-
-        .footer-brand span {
-            color: var(--primary);
-            font-style: italic;
-        }
-
-        .footer-sub {
-            font-size: 13px;
-            color: #4b5563;
-            margin-top: 3px;
-            font-weight: 600;
-        }
-
-        .footer-desc {
-            font-size: 12px;
-            color: #64748b;
-            margin: 12px 0;
-            line-height: 1.5;
-        }
-
-        .social-row {
+            border-radius: 14px;
+            padding: 14px 16px;
             display: flex;
-            gap: 10px;
-            margin: 15px 0;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 15px;
+            border: 1px solid #f1f5f9;
         }
 
-        .social-btn {
-            flex: 1;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 10px;
-            border-radius: 8px;
+        .topup-thumb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #4c1d95, #1e1b4b);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-            text-decoration: none;
+            color: #38bdf8;
+            font-size: 26px;
         }
 
-        .helpline-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 14px 16px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        }
-
-        .helpline-card i {
-            font-size: 24px;
-            color: #0084ff;
-        }
-
-        .helpline-card div b {
-            font-size: 14px;
+        .topup-header-info h3 {
+            font-size: 16px;
+            font-weight: 800;
             color: #1e293b;
         }
 
-        .helpline-card div p {
+        .tag-speed {
+            display: inline-block;
+            background: #fdf4ff;
+            color: #a855f7;
             font-size: 11px;
-            color: #64748b;
-            margin-top: 2px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
         }
 
-        .footer-links {
+        .step-container {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            border: 1px solid #f1f5f9;
+        }
+
+        .step-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 14px;
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: #ffffff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Recharge Item Grid */
+        .recharge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .recharge-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 8px;
             text-align: center;
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 25px;
-            line-height: 2;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.15s;
         }
 
-        .footer-links a {
-            color: #475569;
-            text-decoration: none;
-            margin: 0 5px;
-            font-weight: 500;
+        .recharge-card.active {
+            border-color: var(--primary);
+            background: #faf5ff;
+            box-shadow: 0 0 0 1px var(--primary);
         }
 
-        .copyright {
-            text-align: center;
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 8px;
-            font-weight: 600;
+        .recharge-card.out-of-stock {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        .copyright span {
+        .stock-tag {
+            position: absolute;
+            top: -7px;
+            right: 8px;
+            background: #c084fc;
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .rc-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            line-height: 1.3;
+        }
+
+        .rc-price {
+            font-size: 12px;
+            font-weight: 800;
             color: var(--primary);
+            margin-top: 5px;
         }
 
-        /* Floating Support Button */
-        .floating-headset {
+        /* Inputs & Buttons */
+        .form-input {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+        }
+
+        .check-id-btn {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Payment Selection Cards */
+        .payment-options-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .pay-option-card {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            background: #ffffff;
+        }
+
+        .pay-option-card.active {
+            border-color: var(--primary);
+            background: #faf5ff;
+        }
+
+        .pay-option-card .check-icon {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            color: var(--primary);
+            display: none;
+        }
+
+        .pay-option-card.active .check-icon {
+            display: block;
+        }
+
+        .pay-option-card i {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .pay-option-card b {
+            display: block;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        .pay-option-card span {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .buy-now-btn {
+            width: 100%;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Rules & Conditions */
+        .rules-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .rules-card h4 {
+            font-size: 14px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rules-list {
+            list-style: none;
+            font-size: 12px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .rules-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        .rules-list li::before {
+            content: "☉";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Profile View */
+        .profile-container {
+            padding: 16px;
+        }
+
+        .profile-header {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            margin-bottom: 15px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .avatar-lg {
+            width: 75px;
+            height: 75px;
+            background: #ea580c;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 auto 12px;
+            border: 3px solid #ffedd5;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .profile-stat-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .profile-stat-box p {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        .profile-stat-box h4 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 4px;
+        }
+
+        /* Bottom Floating & Navigation */
+        .floating-chat {
             position: fixed;
             bottom: 80px;
             right: 18px;
@@ -339,13 +540,12 @@
             align-items: center;
             justify-content: center;
             color: white;
-            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+            box-shadow: 0 4px 14px rgba(147, 51, 234, 0.4);
             cursor: pointer;
             z-index: 90;
         }
 
-        /* Bottom Fixed Tab Nav */
-        .bottom-bar {
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -353,13 +553,14 @@
             background: #ffffff;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 6px;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            align-items: center;
+            padding: 8px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
             border-top: 1px solid #f1f5f9;
             z-index: 100;
         }
 
-        .tab-btn {
+        .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -371,104 +572,33 @@
             cursor: pointer;
         }
 
-        .tab-btn.active {
+        .nav-item.active {
             color: var(--primary);
             font-weight: 700;
         }
 
-        .tab-btn i {
-            font-size: 19px;
+        .nav-item i {
+            font-size: 18px;
         }
 
-        /* View Management */
-        .page-view {
-            display: none;
-        }
-
-        .page-view.active {
-            display: block;
-        }
-
-        /* Login Card View (Screenshot 6) */
-        .login-card-container {
-            padding: 30px 16px;
-        }
-
-        .login-box {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px 20px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-            border: 1px solid #f1f5f9;
-        }
-
-        .login-box h2 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 20px;
-        }
-
-        .google-btn {
-            width: 100%;
-            padding: 10px;
-            background: #fff;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
+        .center-add-btn {
+            background: var(--primary);
+            color: #ffffff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            font-size: 22px;
             cursor: pointer;
-            margin-bottom: 18px;
+            margin-top: -24px;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.35);
         }
 
-        .divider {
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .input-group {
-            margin-bottom: 14px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
-            margin-bottom: 5px;
-        }
-
-        .input-control {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            font-size: 14px;
-            background: #ffffff;
-        }
-
-        .primary-action-btn {
-            width: 100%;
-            background: var(--primary);
-            color: #ffffff;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Order Modal */
-        .modal {
+        /* Modal Overlay */
+        .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
@@ -478,11 +608,11 @@
             z-index: 200;
         }
 
-        .modal.show {
+        .modal-overlay.active {
             display: flex;
         }
 
-        .modal-body {
+        .modal-card {
             background: #fff;
             width: 100%;
             max-width: 500px;
@@ -491,378 +621,516 @@
             max-height: 85vh;
             overflow-y: auto;
         }
+
+        /* Views */
+        .view-pane {
+            display: none;
+        }
+
+        .view-pane.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <div class="brand-logo" onclick="switchView('home')">Auto Top<span>UP</span></div>
-        <button class="login-nav-btn" onclick="switchView('login')">Login</button>
+        <div class="brand-logo" onclick="navigateTo('home')">Auto Top<span>UP</span></div>
+        <div class="header-actions">
+            <div class="wallet-pill" onclick="alert('আপনার ওয়ালেট ব্যালেন্স: ৳ ০.০০')">
+                <i class="fa-solid fa-wallet"></i> 0৳
+            </div>
+            <div class="user-avatar-badge" onclick="navigateTo('profile')">
+                Md
+            </div>
+        </div>
     </header>
 
-    <!-- HOME TAB VIEW -->
-    <div id="view-home" class="page-view active">
-        <!-- Notice -->
-        <div class="notice-container">
+    <!-- 1. HOME VIEW -->
+    <div id="view-home" class="view-pane active">
+        <div class="notice-wrap">
             <div class="notice-box">
-                <div class="notice-pill">● NOTICE</div>
-                <div class="notice-text">Auto Top up-এ অর্ডার করা মাত্রই পাবেন মুহূর্তে ডেলিভারি !</div>
+                <span class="notice-tag">● NOTICE</span>
+                <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Auto Top up-এ অর্ডার করা মাত্রই পাবেন দ্রুত ডেলিভারি !</span>
             </div>
         </div>
 
-        <!-- Banner -->
         <div class="banner-wrap">
             <div class="banner-card">
                 <h2>কীভাবে টপআপ করবেন?</h2>
-                <button class="watch-btn" onclick="switchView('tutorial')">Click to watch</button>
+                <button class="banner-btn" onclick="alert('টিউটোরিয়াল শীঘ্রই আসছে')">Click to watch</button>
             </div>
         </div>
 
-        <!-- Special Item -->
         <h2 class="section-title">Special Item</h2>
-        <div class="item-grid">
-            <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+        <div class="catalog-grid">
+            <div class="catalog-card" onclick="openCategory('special_discount')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">DISCOUNT</div>
+                    <div class="catalog-badge">DISCOUNT</div>
                 </div>
-                <div class="card-label">Discount</div>
+                <div class="catalog-label">Discount</div>
             </div>
-
-            <div class="item-card" onclick="openOrderModal('99 Special', 90)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+            <div class="catalog-card" onclick="openCategory('special_99')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">99 SPECIAL</div>
+                    <div class="catalog-badge">99 SPECIAL</div>
                 </div>
-                <div class="card-label">99 Special</div>
-            </div>
-        </div>
-
-        <!-- TOPUP Section -->
-        <h2 class="section-title">TOPUP</h2>
-        <div class="item-grid">
-            <div class="item-card" onclick="openOrderModal('ID Code TopUp (115💎)', 80)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-fire"></i>
-                    <div class="card-badge">ID CODE TOPUP</div>
-                </div>
-                <div class="card-label">ID Code TopUp</div>
-            </div>
-
-            <div class="item-card" onclick="openOrderModal('Weekly/Monthly Pass', 170)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <div class="card-badge">WEEKLY MONTHLY</div>
-                </div>
-                <div class="card-label">Weekly/Monthly</div>
-            </div>
-
-            <div class="item-card" onclick="openOrderModal('Weekly Lite Pass', 50)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">WEEKLY LITE</div>
-                </div>
-                <div class="card-label">Weekly Lite</div>
-            </div>
-
-            <div class="item-card" onclick="openOrderModal('Level Up Pass', 190)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-arrow-up-right-dots"></i>
-                    <div class="card-badge">LEVEL UP PASS</div>
-                </div>
-                <div class="card-label">Level Up Pass</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TOPUP TAB VIEW (Screenshot 4) -->
-    <div id="view-topup" class="page-view">
-        <h2 class="section-title" style="margin-top: 15px;">Special Item</h2>
-        <div class="item-grid">
-            <div class="item-card" onclick="openOrderModal('Discount Pack', 95)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">DISCOUNT</div>
-                </div>
-                <div class="card-label">Discount</div>
-            </div>
-
-            <div class="item-card" onclick="openOrderModal('99 Special', 90)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
-                    <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">99 SPECIAL</div>
-                </div>
-                <div class="card-label">99 Special</div>
+                <div class="catalog-label">99 Special</div>
             </div>
         </div>
 
         <h2 class="section-title">TOPUP</h2>
-        <div class="item-grid">
-            <div class="item-card" onclick="openOrderModal('ID Code TopUp', 80)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+        <div class="catalog-grid">
+            <div class="catalog-card" onclick="openCategory('id_code')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-fire"></i>
-                    <div class="card-badge">ID CODE TOPUP</div>
+                    <div class="catalog-badge">ID CODE TOPUP</div>
                 </div>
-                <div class="card-label">ID Code TopUp</div>
+                <div class="catalog-label">ID Code TopUp</div>
             </div>
-
-            <div class="item-card" onclick="openOrderModal('Weekly/Monthly Pass', 170)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+            <div class="catalog-card" onclick="openCategory('weekly_monthly')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-calendar-check"></i>
-                    <div class="card-badge">WEEKLY MONTHLY</div>
+                    <div class="catalog-badge">WEEKLY MONTHLY</div>
                 </div>
-                <div class="card-label">Weekly/Monthly</div>
+                <div class="catalog-label">Weekly/Monthly</div>
             </div>
-
-            <div class="item-card" onclick="openOrderModal('Weekly Lite', 50)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+            <div class="catalog-card" onclick="openCategory('weekly_lite')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-gem"></i>
-                    <div class="card-badge">WEEKLY LITE</div>
+                    <div class="catalog-badge">WEEKLY LITE</div>
                 </div>
-                <div class="card-label">Weekly Lite</div>
+                <div class="catalog-label">Weekly Lite</div>
             </div>
-
-            <div class="item-card" onclick="openOrderModal('Level Up Pass', 190)">
-                <div class="card-visual">
-                    <span class="watermark">AutoTopUP</span>
+            <div class="catalog-card" onclick="openCategory('level_up')">
+                <div class="catalog-visual">
                     <i class="fa-solid fa-arrow-up-right-dots"></i>
-                    <div class="card-badge">LEVEL UP PASS</div>
+                    <div class="catalog-badge">LEVEL UP PASS</div>
                 </div>
-                <div class="card-label">Level Up Pass</div>
+                <div class="catalog-label">Level Up Pass</div>
             </div>
         </div>
     </div>
 
-    <!-- TUTORIAL TAB VIEW -->
-    <div id="view-tutorial" class="page-view">
-        <div style="padding: 25px 16px; text-align: center;">
-            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #1e3a8a;">টিউটোরিয়াল ভিডিও</h2>
-            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">কীভাবে নিরাপদে আইডি কোড দিয়ে টপআপ করবেন দেখুন</p>
-            <div style="background: #000; border-radius: 12px; height: 210px; display: flex; align-items: center; justify-content: center; color: white;">
-                <i class="fa-brands fa-youtube" style="font-size: 55px; color: red;"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTACT US VIEW (Screenshot 5) -->
-    <div id="view-contact" class="page-view">
-        <div style="padding: 30px 16px;">
-            <div style="background: #fff; border-radius: 12px; padding: 25px 20px; border: 1px solid #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <h2 style="font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 20px;">Contact Us</h2>
-                <a href="https://m.me/" target="_blank" style="text-decoration: none; display: flex; align-items: center; gap: 14px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px;">
-                    <i class="fa-brands fa-facebook-messenger" style="font-size: 32px; color: #a855f7;"></i>
-                    <span style="font-size: 14px; font-weight: 700; color: #334155;">মেসেঞ্জারে লাইভ চ্যাটের জন্য এখানে ক্লিক করুন।</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- LOGIN VIEW (Screenshot 6) -->
-    <div id="view-login" class="page-view">
-        <div class="login-card-container">
-            <div class="login-box">
-                <h2>Login</h2>
-                <button class="google-btn" onclick="alert('Google Login Feature Coming Soon!')">
-                    <i class="fa-brands fa-google" style="color: #ea4335;"></i> Login with Google
-                </button>
-                <div class="divider">Or sign in with credentials</div>
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" class="input-control" placeholder="Email">
+    <!-- 2. DETAIL TOPUP VIEW -->
+    <div id="view-topup-detail" class="view-pane">
+        <div class="topup-view-container">
+            <div class="topup-header-card">
+                <div class="topup-thumb" id="detailThumb">
+                    <i class="fa-solid fa-gem"></i>
                 </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" class="input-control" placeholder="Password">
+                <div class="topup-header-info">
+                    <h3 id="detailCategoryTitle">ID Code TopUp</h3>
+                    <span class="tag-speed">⚡ ২ সেকেন্ডে টপআপ</span>
                 </div>
-                <button class="primary-action-btn" onclick="alert('Login Successful!')">Login</button>
+            </div>
+
+            <!-- ধাপ ১ -->
+            <div class="step-container">
+                <div class="step-heading">
+                    <span class="step-num">1</span>
+                    <span>Select Recharge</span>
+                </div>
+                <div class="recharge-grid" id="rechargeGridContainer"></div>
+            </div>
+
+            <!-- ধাপ ২ -->
+            <div class="step-container">
+                <div class="step-heading">
+                    <span class="step-num">2</span>
+                    <span>Account Info</span>
+                </div>
+                <p style="font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 8px;">এখানে আপনার গেমের আইডি কোড লিখুন</p>
+                <input type="number" id="gameUidInput" class="form-input" placeholder="এখানে আপনার গেমের আইডি কোড লিখুন">
+                <button class="check-id-btn" onclick="checkPlayerId()">আপনার গেম আইডির নাম চেক করুন</button>
+                <p id="playerVerifyText" style="font-size: 12px; color: #16a34a; font-weight: bold; margin-top: 6px; display: none;"></p>
+            </div>
+
+            <!-- ধাপ ৩ -->
+            <div class="step-container">
+                <div class="step-heading">
+                    <span class="step-num">3</span>
+                    <span>Select one option</span>
+                </div>
+                
+                <div class="payment-options-row">
+                    <div class="pay-option-card active" onclick="setPayMethod('wallet', this)">
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-wallet" style="color: var(--primary);"></i>
+                        <b>Wallet Pay</b>
+                        <span>AutoTopUP ওয়ালেট পে</span>
+                    </div>
+
+                    <div class="pay-option-card" onclick="setPayMethod('instant', this)">
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-bolt" style="color: #ea580c;"></i>
+                        <b>Instant Pay</b>
+                        <span>bKash / Nagad</span>
+                    </div>
+                </div>
+
+                <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">
+                    ⓘ আপনার অ্যাকাউন্ট ব্যালেন্স: <b>৳ 0.00</b>
+                </div>
+                <div style="font-size: 13px; color: #1e293b; font-weight: bold; margin-bottom: 12px;">
+                    ⓘ প্রোডাক্ট কিনতে আপনার প্রয়োজন: <span id="requiredAmountText" style="color: var(--primary);">৳ ০</span>
+                </div>
+
+                <button class="buy-now-btn" onclick="handleBuyNow()">Buy Now</button>
+            </div>
+
+            <!-- Rules & Conditions -->
+            <div class="rules-card">
+                <h4><i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Rules & Conditions</h4>
+                <ul class="rules-list">
+                    <li>শুধুমাত্র Bangladesh সার্ভারে ID Code দিয়ে টপ আপ হবে।</li>
+                    <li>Player ID ভুল দিয়ে Diamond না পেলে কর্তৃপক্ষ দায়ী নয়।</li>
+                    <li>Order কমপ্লিট হওয়ার পরেও আইডিতে ডায়মন্ড না গেলে চেক করার জন্য ID Pass দিতে হবে।</li>
+                    <li>অর্ডার Cancel হলে কি কারণে তা Cancel হয়েছে তা অর্ডার হিস্টোরিতে দেওয়া থাকে, অনুগ্রহ পূর্বক দেখে পুনরায় সঠিক তথ্য দিয়ে অর্ডার করবেন।</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- Universal Footer Info (Screenshots 3, 4, 6) -->
-    <div class="footer-info">
-        <div class="footer-brand">Auto Top<span>UP</span></div>
-        <div class="footer-sub">AutoTopUP - Games TopUp</div>
-        <div class="footer-sub" style="font-weight: 700; color: #334155;">Fast • Safe • Reliable – GAME Top-Up</div>
-        
-        <div class="footer-desc">
-            <b>নোটিশ:</b><br>
-            ডায়মন্ড কিনুন এখন AutoTopUP থেকে — দ্রুত, সহজ এবং নিরাপদে !<br><br>
-            AutoTopUP থেকে আপনি সরাসরি ডায়মন্ড কিনতে পারবেন bKash & Nagad পেমেন্টের মাধ্যমে।
-        </div>
-
-        <div class="social-row">
-            <a href="#" class="social-btn"><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</a>
-            <a href="#" class="social-btn"><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube</a>
-        </div>
-
-        <h3 style="font-size: 17px; font-weight: 800; margin-top: 15px; color: #0f172a;">Contact Us</h3>
-        <div class="helpline-card">
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <div>
-                <b>Facebook HelpLine <i class="fa-solid fa-circle-check" style="color: #0084ff; font-size: 13px;"></i></b>
-                <p>সকাল ৮টা থেকে রাত ১২টা</p>
+    <!-- 3. PROFILE VIEW -->
+    <div id="view-profile" class="view-pane">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="avatar-lg">Md</div>
+                <h3 style="font-size: 18px; font-weight: 800;">Md Saikat <span style="font-size: 11px; background: #dcfce7; color: #16a34a; padding: 2px 8px; border-radius: 12px;">● Verified</span></h3>
+                <p style="font-size: 11px; color: #64748b; margin-top: 4px;">Support PIN: 207222572 ★ Verified Account</p>
+                
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="text-align: left;">
+                        <p style="font-size: 11px; color: #64748b;">Wallet Balance</p>
+                        <h2 style="color: var(--primary); font-size: 22px;">Tk 0</h2>
+                    </div>
+                    <button class="banner-btn" style="background: var(--primary);" onclick="alert('অ্যাড মানি অপশন শীঘ্রই যুক্ত হবে')">Add Money</button>
+                </div>
             </div>
-        </div>
 
-        <div class="footer-links">
-            <a href="#">About Us</a> <a href="#">Terms & Conditions</a> <a href="#">Privacy Policy</a><br>
-            <a href="#">Refund & Return Policy</a> <a href="#">Delete Account Policy</a>
-        </div>
-        <div class="copyright">
-            All Rights Reserved | Developed By <span>Team AutoTopUP</span>
+            <div class="profile-grid">
+                <div class="profile-stat-box">
+                    <p><i class="fa-solid fa-clipboard-list" style="color: #0284c7;"></i> Orders</p>
+                    <h4>0</h4>
+                </div>
+                <div class="profile-stat-box">
+                    <p><i class="fa-solid fa-dollar-sign" style="color: #f59e0b;"></i> Total Spend</p>
+                    <h4>0 Tk</h4>
+                </div>
+                <div class="profile-stat-box">
+                    <p><i class="fa-solid fa-calendar-days" style="color: #ef4444;"></i> Weekly Spend</p>
+                    <h4>0 Tk</h4>
+                </div>
+                <div class="profile-stat-box">
+                    <p><i class="fa-solid fa-star" style="color: #10b981;"></i> Rank</p>
+                    <h4>Bronze</h4>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Floating Headset Icon (Screenshots 1-6) -->
-    <div class="floating-headset" onclick="switchView('contact')">
+    <!-- Floating Chat Button -->
+    <div class="floating-chat" onclick="alert('সরাসরি হেল্পলাইন সাপোর্ট চালু হচ্ছে!')">
         <i class="fa-solid fa-headset"></i>
     </div>
 
-    <!-- Bottom Navigation Bar (Screenshots 1-6) -->
-    <div class="bottom-bar">
-        <button class="tab-btn active" id="btn-home" onclick="switchView('home')">
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <button class="nav-item active" id="nav-home" onclick="navigateTo('home')">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </button>
-        <button class="tab-btn" id="btn-tutorial" onclick="switchView('tutorial')">
-            <i class="fa-brands fa-youtube"></i>
-            <span>Tutorial</span>
+        <button class="nav-item" onclick="alert('আপনার কোনো পূর্ববর্তী অর্ডার নেই')">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>My Orders</span>
         </button>
-        <button class="tab-btn" id="btn-topup" onclick="switchView('topup')">
-            <i class="fa-solid fa-border-all"></i>
-            <span>TopUp</span>
+        <button class="center-add-btn" onclick="alert('Add Money অপশন বেছে নিন')">
+            <i class="fa-solid fa-plus"></i>
         </button>
-        <button class="tab-btn" id="btn-contact" onclick="switchView('contact')">
-            <i class="fa-solid fa-headset"></i>
-            <span>Contact Us</span>
+        <button class="nav-item" onclick="alert('আপনার কোনো রিডিম কোড নেই')">
+            <i class="fa-solid fa-receipt"></i>
+            <span>My Codes</span>
+        </button>
+        <button class="nav-item" id="nav-profile" onclick="navigateTo('profile')">
+            <i class="fa-solid fa-user"></i>
+            <span>My Account</span>
         </button>
     </div>
 
-    <!-- Order Popup Form -->
-    <div class="modal" id="orderModal">
-        <div class="modal-body">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <h3 id="modalTitle" style="font-size: 17px; font-weight: 800;">অর্ডার নিশ্চিত করুন</h3>
-                <span onclick="closeOrderModal()" style="font-size: 26px; cursor: pointer; color: #64748b;">&times;</span>
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 style="font-size:16px; font-weight:800;">অর্ডার ও পেমেন্ট কনফার্মেশন</h3>
+                <span onclick="closeModal()" style="font-size:24px; cursor:pointer; color:#64748b;">&times;</span>
             </div>
-            
-            <p style="font-weight: bold; margin-bottom: 14px; color: var(--primary);" id="packDetail"></p>
 
-            <label style="font-size: 13px; font-weight: 700;">Player UID:</label>
-            <input type="number" id="uidInput" class="input-control" placeholder="আপনার গেমের UID লিখুন" style="margin-top: 5px; margin-bottom: 12px;">
+            <div style="background:#faf5ff; border:1px solid #e9d5ff; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px;">
+                <p>আইটেম: <b id="modalPackName" style="color:var(--primary);"></b></p>
+                <p>প্রদেয় মূল্য: <b id="modalPackPrice" style="color:var(--primary);"></b></p>
+                <p>Player UID: <b id="modalPlayerUid"></b></p>
+            </div>
 
-            <label style="font-size: 13px; font-weight: 700;">পেমেন্ট মেথড:</label>
-            <select id="methodInput" class="input-control" style="margin-top: 5px; margin-bottom: 12px;">
+            <label style="font-size:12px; font-weight:700;">পেমেন্ট মেথড নির্বাচন করুন:</label>
+            <select id="modalPayGateway" class="form-input" style="margin-top:4px;">
                 <option value="bKash">বিকাশ (Personal Send Money)</option>
                 <option value="Nagad">নগদ (Personal Send Money)</option>
             </select>
 
-            <div style="background: #f5f3ff; border-left: 3px solid var(--primary); padding: 8px 10px; font-size: 12px; margin-bottom: 12px;">
-                টাকা পাঠানোর নম্বর: <b>017XXXXXXXX</b> (Send Money করুন)
+            <div style="background:#fdf4ff; border-left:3px solid var(--primary); padding:8px 10px; font-size:12px; margin-bottom:12px;">
+                নম্বর: <b>017XXXXXXXX</b> (Send Money করুন)
             </div>
 
-            <label style="font-size: 13px; font-weight: 700;">Transaction ID (TrxID):</label>
-            <input type="text" id="trxInput" class="input-control" placeholder="টাকা পাঠানোর পর TrxID বসান" style="margin-top: 5px; margin-bottom: 15px;">
+            <label style="font-size:12px; font-weight:700;">Transaction ID (TrxID) দিন:</label>
+            <input type="text" id="modalTrxId" class="form-input" placeholder="টাকা পাঠানোর পর TrxID বসান" style="margin-top:4px;">
 
-            <button class="primary-action-btn" id="sendBtn" onclick="submitTelegramOrder()">অর্ডার কনফার্ম করুন</button>
+            <button class="buy-now-btn" id="confirmOrderBtn" onclick="submitFinalOrder()">অর্ডার নিশ্চিত করুন</button>
         </div>
     </div>
 
     <script>
-        let currentItem = '';
-        let currentPrice = 0;
+        /* ========================================================
+           ১. আপনি এখান থেকেই খুব সহজে সব পণ্যের নাম, দাম ও স্টক পরিবর্তন করতে পারবেন
+           ======================================================== */
+        const SHOP_DATA = {
+            id_code: {
+                title: "ID Code TopUp",
+                icon: "fa-fire",
+                items: [
+                    { name: "25 Diamond TopUp", price: 20, inStock: true },
+                    { name: "50 Diamond TopUp", price: 35, inStock: true },
+                    { name: "100 Diamond TopUp", price: 71, inStock: true },
+                    { name: "115 Diamond TopUp", price: 79, inStock: true },
+                    { name: "240 Diamond TopUp", price: 158, inStock: true },
+                    { name: "355 Diamond TopUp", price: 239, inStock: true },
+                    { name: "505 Diamond TopUp", price: 336, inStock: true },
+                    { name: "610 Diamond TopUp", price: 400, inStock: true },
+                    { name: "850 Diamond TopUp", price: 559, inStock: true },
+                    { name: "1090 Diamond TopUp", price: 717, inStock: true },
+                    { name: "1240 Diamond TopUp", price: 800, inStock: true },
+                    { name: "1850 Diamond TopUp", price: 1200, inStock: true },
+                    { name: "2530 Diamond TopUp", price: 1610, inStock: true },
+                    { name: "5060 Diamond TopUp", price: 3200, inStock: true }
+                ]
+            },
+            weekly_monthly: {
+                title: "Weekly / Monthly Packages",
+                icon: "fa-calendar-check",
+                items: [
+                    { name: "Weekly Membership", price: 158, inStock: true },
+                    { name: "Monthly Membership", price: 790, inStock: true },
+                    { name: "2X Weekly Package", price: 316, inStock: true },
+                    { name: "2X Monthly Package", price: 1580, inStock: true },
+                    { name: "5X Weekly Package", price: 790, inStock: true },
+                    { name: "10X Weekly Package", price: 1580, inStock: true },
+                    { name: "1X Weekly + 1X Monthly", price: 949, inStock: true },
+                    { name: "2X Weekly + 2X Monthly", price: 1898, inStock: true }
+                ]
+            },
+            weekly_lite: {
+                title: "Weekly Lite",
+                icon: "fa-gem",
+                items: [
+                    { name: "1X Weekly lite", price: 40, inStock: true },
+                    { name: "2X Weekly lite", price: 79, inStock: true },
+                    { name: "3X Weekly Lite", price: 118, inStock: true },
+                    { name: "5X Weekly Lite", price: 196, inStock: true }
+                ]
+            },
+            level_up: {
+                title: "Level Up Pass",
+                icon: "fa-arrow-up-right-dots",
+                items: [
+                    { name: "Level Up Pass - Level 15", price: 70, inStock: true },
+                    { name: "Level Up Pass - Level 20", price: 70, inStock: true },
+                    { name: "Level Up Pass - Level 25", price: 70, inStock: true },
+                    { name: "Level Up Pass - Level 30", price: 100, inStock: true }
+                ]
+            },
+            special_discount: {
+                title: "Special Discount",
+                icon: "fa-gem",
+                items: [
+                    { name: "Special Airdrop 90", price: 85, inStock: true },
+                    { name: "Discount Diamonds Pack", price: 95, inStock: false }
+                ]
+            },
+            special_99: {
+                title: "99 Special",
+                icon: "fa-gem",
+                items: [
+                    { name: "99 Special Offer", price: 90, inStock: true }
+                ]
+            }
+        };
 
-        // আপনার টেলিগ্রাম বট ডিটেইলস
-        const botToken = "8835477513:AAHdsbskTwgNs16ord36FAhe7JYhWeWQBXY";
-        const chatId = "8778499897";
+        // টেলিগ্রাম বট কনফিগারেশন[span_3](start_span)[span_3](end_span)
+        const BOT_TOKEN = "8835477513:AAHdsbskTwgNs16ord36FAhe7JYhWeWQBXY";
+        const CHAT_ID = "8778499897";
 
-        // ট্যাব পরিবর্তন ফাংশন
-        function switchView(tabName) {
-            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        let selectedCategoryKey = 'id_code';
+        let selectedItemName = '';
+        let selectedItemPrice = 0;
+        let selectedPayMethod = 'wallet';
 
-            const targetView = document.getElementById('view-' + tabName);
-            if (targetView) targetView.classList.add('active');
+        function openCategory(catKey) {
+            selectedCategoryKey = catKey;
+            const categoryData = SHOP_DATA[catKey];
+            if (!categoryData) return;
 
-            const targetBtn = document.getElementById('btn-' + tabName);
-            if (targetBtn) targetBtn.classList.add('active');
+            document.getElementById('detailCategoryTitle').innerText = categoryData.title;
+            document.getElementById('detailThumb').innerHTML = `<i class="fa-solid ${categoryData.icon}"></i>`;
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const container = document.getElementById('rechargeGridContainer');
+            container.innerHTML = '';
+
+            categoryData.items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = `recharge-card ${item.inStock ? '' : 'out-of-stock'} ${index === 0 && item.inStock ? 'active' : ''}`;
+                
+                let stockTagHtml = item.inStock ? '' : '<span class="stock-tag">Out of stock</span>';
+                
+                card.innerHTML = `
+                    ${stockTagHtml}
+                    <div class="rc-title">${item.name}</div>
+                    <div class="rc-price">BDT ${item.price}</div>
+                `;
+
+                if (item.inStock) {
+                    card.onclick = () => selectRechargeItem(card, item.name, item.price);
+                    if (index === 0) {
+                        selectedItemName = item.name;
+                        selectedItemPrice = item.price;
+                        updateRequiredAmount(item.price);
+                    }
+                }
+
+                container.appendChild(card);
+            });
+
+            navigateTo('topup-detail');
         }
 
-        // অর্ডার পপ-আপ খোলা
-        function openOrderModal(name, price) {
-            currentItem = name;
-            currentPrice = price;
-            document.getElementById('modalTitle').innerText = name;
-            document.getElementById('packDetail').innerText = `প্যাকেজ: ${name} | মূল্য: ৳${price}`;
-            document.getElementById('orderModal').classList.add('show');
+        function selectRechargeItem(cardElement, name, price) {
+            document.querySelectorAll('.recharge-card').forEach(el => el.classList.remove('active'));
+            cardElement.classList.add('active');
+            selectedItemName = name;
+            selectedItemPrice = price;
+            updateRequiredAmount(price);
         }
 
-        function closeOrderModal() {
-            document.getElementById('orderModal').classList.remove('show');
+        function updateRequiredAmount(price) {
+            document.getElementById('requiredAmountText').innerText = `৳ ${price}`;
         }
 
-        // টেলিগ্রামে অর্ডার পাঠানো
-        function submitTelegramOrder() {
-            const uid = document.getElementById('uidInput').value.trim();
-            const trxId = document.getElementById('trxInput').value.trim();
-            const method = document.getElementById('methodInput').value;
-            const btn = document.getElementById('sendBtn');
+        function checkPlayerId() {
+            const uid = document.getElementById('gameUidInput').value.trim();
+            const res = document.getElementById('playerVerifyText');
+            if (!uid) {
+                alert("দয়া করে আগে গেম আইডি কোডটি লিখুন!");
+                return;
+            }
+            res.style.display = 'block';
+            res.innerText = `আইডি ভেরিফাইড! Player: Pro_Gamer (BD Server)`;
+        }
 
-            if (!uid || !trxId) {
-                alert("দয়া করে UID এবং TrxID সঠিকভাবে প্রদান করুন!");
+        function setPayMethod(type, element) {
+            selectedPayMethod = type;
+            document.querySelectorAll('.pay-option-card').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function handleBuyNow() {
+            const uid = document.getElementById('gameUidInput').value.trim();
+            if (!selectedItemName) {
+                alert("দয়া করে একটি রিচার্জ প্যাক সিলেক্ট করুন!");
+                return;
+            }
+            if (!uid) {
+                alert("দয়া করে আপনার গেমের Player UID কোডটি লিখুন!");
                 return;
             }
 
-            btn.innerText = "অর্ডার পাঠানো হচ্ছে...";
+            if (selectedPayMethod === 'wallet') {
+                alert("আপনার ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই! অনুগ্রহ করে Instant Pay (bKash/Nagad) বেছে নিন বা Add Money করুন।");
+                return;
+            }
+
+            document.getElementById('modalPackName').innerText = selectedItemName;
+            document.getElementById('modalPackPrice').innerText = `৳ ${selectedItemPrice}`;
+            document.getElementById('modalPlayerUid').innerText = uid;
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function submitFinalOrder() {
+            const trx = document.getElementById('modalTrxId').value.trim();
+            const gateway = document.getElementById('modalPayGateway').value;
+            const uid = document.getElementById('gameUidInput').value.trim();
+            const btn = document.getElementById('confirmOrderBtn');
+
+            if (!trx) {
+                alert("টাকা পাঠানোর পর TrxID টি ইনপুট বক্সে লিখুন!");
+                return;
+            }
+
+            btn.innerText = "অর্ডার নিশ্চিত করা হচ্ছে...";
             btn.disabled = true;
 
-            const message = `🛒 *নতুন অর্ডার এসেছে (Auto Top up)!*\n\n` +
-                            `💎 *প্যাকেজ:* ${currentItem}\n` +
-                            `💵 *দাম:* ৳${currentPrice}\n` +
-                            `👤 *Player UID:* \`${uid}\`\n` +
-                            `💳 *মেথড:* ${method}\n` +
-                            `🧾 *TrxID:* \`${trxId}\``;
+            const text = `🛒 *নতুন অর্ডার গ্রহণ করা হয়েছে (Auto Top up)!*\n\n` +
+                         `📂 *ক্যাটাগরি:* ${SHOP_DATA[selectedCategoryKey].title}\n` +
+                         `💎 *আইটেম:* ${selectedItemName}\n` +
+                         `💵 *মূল্য:* ৳${selectedItemPrice}\n` +
+                         `👤 *Player UID:* \`${uid}\`\n` +
+                         `💳 *গেটওয়ে:* ${gateway}\n` +
+                         `🧾 *TrxID:* \`${trx}\``;
 
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
+                    chat_id: CHAT_ID,
+                    text: text,
                     parse_mode: "Markdown"
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.ok) {
-                    alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!");
-                    closeOrderModal();
-                    document.getElementById('uidInput').value = '';
-                    document.getElementById('trxInput').value = '';
+                    alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে! কিছুক্ষণের মধ্যে ডায়মন্ড পৌঁছে যাবে।");
+                    closeModal();
+                    document.getElementById('modalTrxId').value = '';
+                    document.getElementById('gameUidInput').value = '';
+                    document.getElementById('playerVerifyText').style.display = 'none';
+                    navigateTo('home');
                 } else {
-                    alert("অর্ডার পাঠানো যায়নি! অনুগ্রহ করে টেলিগ্রাম বটে /start চেপেছেন কিনা দেখে নিন।");
+                    alert("অর্ডার পাঠানো যায়নি! টেলিগ্রাম বটে /start দেওয়া আছে কিনা যাচাই করুন।");
                 }
             })
             .catch(() => alert("ইন্টারনেট সংযোগ সমস্যা হয়েছে!"))
             .finally(() => {
-                btn.innerText = "অর্ডার কনফার্ম করুন";
+                btn.innerText = "অর্ডার নিশ্চিত করুন";
                 btn.disabled = false;
             });
+        }
+
+        function navigateTo(viewName) {
+            document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            const target = document.getElementById('view-' + viewName);
+            if (target) target.classList.add('active');
+
+            const navBtn = document.getElementById('nav-' + viewName);
+            if (navBtn) navBtn.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
