@@ -20,6 +20,7 @@
         .payment-info { background: #0f172a; padding: 12px; border-radius: 6px; margin-top: 15px; font-size: 14px; border-left: 4px solid #f97316; }
         button { width: 100%; background: #f97316; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 20px; }
         button:hover { background: #ea580c; }
+        button:disabled { background: #64748b; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -79,18 +80,58 @@
     }
 
     function submitOrder() {
-        const uid = document.getElementById('playerId').value;
-        const trxId = document.getElementById('trxId').value;
+        const uid = document.getElementById('playerId').value.trim();
+        const trxId = document.getElementById('trxId').value.trim();
         const method = document.getElementById('paymentMethod').value;
+        const submitBtn = document.querySelector('button');
 
         if (!uid || !trxId) {
             alert("অনুগ্রহ করে UID এবং TrxID সঠিকভাবে দিন!");
             return;
         }
 
-        // অর্ডার মেসেজ তৈরি
-        const message = `নতুন অর্ডার এসেছে!\nUID: ${uid}\nপ্যাক: ${selectedPackage}\nমূল্য: ৳${selectedPrice}\nপেমেন্ট: ${method}\nTrxID: ${trxId}`;
-        alert(message);
+        submitBtn.innerText = "অর্ডার প্রসেস হচ্ছে...";
+        submitBtn.disabled = true;
+
+        const botToken = "8835477513:AAHdsbskTwgNs16ord36FAhe7JYhWeWQBXY";
+        const chatId = "8778499897";
+
+        const text = `🛒 *নতুন অর্ডার এসেছে!*\n\n` +
+                     `👤 *Player UID:* \`${uid}\`\n` +
+                     `💎 *প্যাকেজ:* ${selectedPackage}\n` +
+                     `💵 *মূল্য:* ৳${selectedPrice}\n` +
+                     `💳 *মেথড:* ${method}\n` +
+                     `🧾 *TrxID:* \`${trxId}\``;
+
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: text,
+                parse_mode: "Markdown"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!");
+                document.getElementById('playerId').value = '';
+                document.getElementById('trxId').value = '';
+            } else {
+                alert("অর্ডার পাঠাতে সমস্যা হয়েছে। আপনার টেলিগ্রাম বটে গিয়ে /start চাপ দিয়েছেন কিনা চেক করুন।");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("নেটওয়ার্ক সমস্যা হয়েছে!");
+        })
+        .finally(() => {
+            submitBtn.innerText = "অর্ডার কনফার্ম করুন";
+            submitBtn.disabled = false;
+        });
     }
 </script>
 
